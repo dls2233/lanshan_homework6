@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.lanshan_homework6.dao.UserService">  <!--这里的namespace即为我们之前创建的mapper接口的全类名-->
+    <select id="usersLogin" resultType="String">
+        from user
+        where username = #{username}
+    </select>
+
+    <select id="lostQuery" resultType="com.example.lanshan_homework6.lostGoods">
+        SELECT *
+        FROM lost
+    </select>
+
+    <insert id="lostAdd" parameterType="com.example.lanshan_homework6.lostGoods">
+        INSERT INTO lost(lost_id, lost_name; lost_position, lost_description, claim_position, lost_date, is_returned)
+        VALUES (#{lost_id}, #{lost_name}, #{lost_position}, #{lost_description}, #{claim_position}, #{lost_date}, #{is_returned})
+    </insert>
+
+    <delete id="lostDel" parameterType="int">
+        delete from lost where lost_id=#{lost_id}
+    </delete>
+
+    <select id="lostQueryChange" resultType="com.example.lanshan_homework6.lostGoods">
+        select * from lost where 1=1
+        <if test="lost_name!=null and lost_name!=''">
+            and lostName like concat('%',#{lost_name},'%')     </if>
+    </select>
+
+</mapper>
